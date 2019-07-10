@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace TekoTest
 {
@@ -49,6 +51,9 @@ namespace TekoTest
             int vacationsYear = 2020;
             int vacationDuration = 2 * 7 - 1;
 
+            Console.WriteLine("Initialization...");
+            Thread.Sleep(500);
+
             myVacations.Add(new Vacation(1, vacationsYear, vacationDuration));
 
             myVacations.Add(myVacations.Last().GetNonintersectVacation(vacationsYear, vacationDuration)); 
@@ -61,8 +66,16 @@ namespace TekoTest
                 depVacations.Add(depVacations.Last().GetNonintersectVacation(vacationsYear, vacationDuration));
             }
 
+            Console.WriteLine("Finding intersections...");
+            Thread.Sleep(500);
+
             File.WriteAllText("result.txt", GetVacationsIntersectionReport(myVacations, depVacations));
 
+            Console.WriteLine("Storing report into 'result.txt'...\n");
+
+            Console.WriteLine("Press any key to continue");
+
+            Console.ReadKey();
         }
     }
 }
